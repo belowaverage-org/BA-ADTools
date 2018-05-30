@@ -9,7 +9,7 @@ namespace BAADTools
 {
     public partial class MainForm : Form
     {
-        public List<string> stResults = new List<string>();
+        public List<string> dnResults = new List<string>();
         public List<string> nmResults = new List<string>();
 
         public int liveResultsCount = 0;
@@ -42,8 +42,8 @@ namespace BAADTools
 
         public void drawResults()
         {
-            listBox1.Hide();
-            listBox1.Items.Clear();
+            mainList.Hide();
+            mainList.Items.Clear();
             lbCount.Text = "0";
             foreach (string result in nmResults)
             {
@@ -51,20 +51,15 @@ namespace BAADTools
                 {
                     lbCount.Text = (int.Parse(lbCount.Text) + 1).ToString();
                     statusBar.Update();
-                    listBox1.Items.Add(result);
+                    mainList.Items.Add(result);
                 }
             }
-            listBox1.Show();
+            mainList.Show();
         }
 
-        private void toolStripComboBox1_Click(object sender, EventArgs e)
+        public void openSelected()
         {
-
-        }
-
-        private void serverToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
+            new UserForm(this, dnResults[mainList.SelectedIndex]).Show();
         }
 
         private void queryServer_DoWork(object sender, DoWorkEventArgs e)
@@ -75,10 +70,11 @@ namespace BAADTools
                 filterString = filterString + "*";
             }
             dsearch.Filter = "(&(objectClass=user)(displayName=*" + filterString + ")(!(objectClass=computer)))";
+            dsearch.Sort = new SortOption("cn", SortDirection.Ascending);
             filterString = "";
             dsearch.CacheResults = false;
             SearchResultCollection results = dsearch.FindAll();
-            stResults.Clear();
+            dnResults.Clear();
             nmResults.Clear();
             int max = results.Count;
             int count = 0;
@@ -87,10 +83,10 @@ namespace BAADTools
             {
                 liveResultsCount = count++;
                 int prog = Convert.ToInt32((Convert.ToDouble(count) / Convert.ToDouble(max)) * 100);
-                stResults.Add(result.Path);
                 DirectoryEntry entry = result.GetDirectoryEntry();
                 if (entry.Properties.Contains("cn"))
                 {
+                    dnResults.Add(result.Path);
                     nmResults.Add(entry.Properties["cn"].Value.ToString());
                 }
                 if(prog % 5 == 0 && prog != lastProgReport)
@@ -110,41 +106,10 @@ namespace BAADTools
         private void queryServer_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             drawResults();
-        }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripTextBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripTextBox2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void displayNameToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripTextBox1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void menuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void searchModeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
+            //TEST
+            mainList.SelectedIndex = 0;
+            openSelected();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -160,6 +125,24 @@ namespace BAADTools
         private void aboutBelowAverageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("https://belowaverage.org/");
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            new StatusBox().Show();
+        }
+
+        private void listBox1_DbCLick(object sender, EventArgs e)
+        {
+            openSelected();
+        }
+
+        private void listBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == char.Parse("\r"))
+            {
+                openSelected();
+            }
         }
     }
 }

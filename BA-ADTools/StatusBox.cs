@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.DirectoryServices;
-using System.Diagnostics;
+using System.DirectoryServices.ActiveDirectory;
 
 namespace BAADTools
 {
@@ -21,7 +13,12 @@ namespace BAADTools
 
         private void StatusBox_Load(object sender, EventArgs e)
         {
-            Debug.WriteLine(System.DirectoryServices.ActiveDirectory.Domain.GetCurrentDomain().Name);
+            Domain curDom = Domain.GetCurrentDomain();
+            domBox.Text = curDom.Name;
+            dcBox.Text = curDom.FindDomainController().Name;
+            siteBox.Text = ActiveDirectorySite.GetComputerSite().Name;
+            userBox.Text = Environment.UserName;
+            dnBox.Text = Environment.UserDomainName;
         }
     }
 }
