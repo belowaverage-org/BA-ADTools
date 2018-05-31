@@ -165,6 +165,7 @@
             this.groupToolStripMenuItem.Name = "groupToolStripMenuItem";
             this.groupToolStripMenuItem.Size = new System.Drawing.Size(133, 20);
             this.groupToolStripMenuItem.Text = "Group Management...";
+            this.groupToolStripMenuItem.Click += new System.EventHandler(this.groupToolStripMenuItem_Click);
             // 
             // manageToolStripMenuItem
             // 

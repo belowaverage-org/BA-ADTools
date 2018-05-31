@@ -83,11 +83,10 @@ namespace BAADTools
             {
                 liveResultsCount = count++;
                 int prog = Convert.ToInt32((Convert.ToDouble(count) / Convert.ToDouble(max)) * 100);
-                DirectoryEntry entry = result.GetDirectoryEntry();
-                if (entry.Properties.Contains("cn"))
+                if (result.Properties.Contains("cn"))
                 {
                     dnResults.Add(result.Path);
-                    nmResults.Add(entry.Properties["cn"].Value.ToString());
+                    nmResults.Add(result.Properties["cn"][0].ToString());
                 }
                 if(prog % 5 == 0 && prog != lastProgReport)
                 {
@@ -106,10 +105,6 @@ namespace BAADTools
         private void queryServer_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             drawResults();
-
-            //TEST
-            mainList.SelectedIndex = 0;
-            openSelected();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

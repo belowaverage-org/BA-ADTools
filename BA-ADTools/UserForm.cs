@@ -80,5 +80,10 @@ namespace BAADTools
                 countryBox.Text = userProp["co"].Value.ToString();
 
         }
+
+        private void groupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new groupForm(this).Show();
+        }
     }
 }
