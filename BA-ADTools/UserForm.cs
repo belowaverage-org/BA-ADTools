@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace BAADTools
 {
-    public partial class UserForm : Form
+    public partial class userForm : Form
     {
 
         public Form parentForm;
@@ -21,7 +21,7 @@ namespace BAADTools
 
         public System.DirectoryServices.PropertyCollection userProp;
 
-        public UserForm(Form pf, string dn)
+        public userForm(Form pf, string dn)
         {
             userDN = dn;
             parentForm = pf;

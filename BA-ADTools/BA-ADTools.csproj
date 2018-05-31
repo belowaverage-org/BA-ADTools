@@ -116,29 +116,35 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="rootForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="rootForm.Designer.cs">
+      <DependentUpon>rootForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="groupForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="groupForm.Designer.cs">
       <DependentUpon>groupForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserForm.cs">
+    <Compile Include="userForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserForm.Designer.cs">
-      <DependentUpon>UserForm.cs</DependentUpon>
+    <Compile Include="userForm.Designer.cs">
+      <DependentUpon>userForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="StatusBox.cs">
+    <Compile Include="statusForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StatusBox.Designer.cs">
-      <DependentUpon>StatusBox.cs</DependentUpon>
+    <Compile Include="statusForm.Designer.cs">
+      <DependentUpon>statusForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="mainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="mainForm.Designer.cs">
+      <DependentUpon>mainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -148,11 +154,14 @@
     <EmbeddedResource Include="groupForm.resx">
       <DependentUpon>groupForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserForm.resx">
-      <DependentUpon>UserForm.cs</DependentUpon>
+    <EmbeddedResource Include="rootForm.resx">
+      <DependentUpon>rootForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="userForm.resx">
+      <DependentUpon>userForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mainForm.resx">
+      <DependentUpon>mainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -164,8 +173,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="StatusBox.resx">
-      <DependentUpon>StatusBox.cs</DependentUpon>
+    <EmbeddedResource Include="statusForm.resx">
+      <DependentUpon>statusForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">

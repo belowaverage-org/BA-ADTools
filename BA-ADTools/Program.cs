@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.DirectoryServices;
 using System.Windows.Forms;
 
 namespace BAADTools
@@ -14,9 +16,20 @@ namespace BAADTools
         [STAThread]
         static void Main()
         {
+            generateSettings();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new rootForm());
         }
+
+        static void generateSettings()
+        {
+            DirectoryEntry RootDirEntry = new DirectoryEntry("LDAP://RootDSE");
+            Settings.domainSearchRoot = "LDAP://" + RootDirEntry.Properties["defaultNamingContext"].Value;
+        }
+    }
+    class Settings
+    {
+        public static string domainSearchRoot;
     }
 }

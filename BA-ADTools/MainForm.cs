@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace BAADTools
 {
-    public partial class MainForm : Form
+    public partial class mainForm : Form
     {
         public List<string> dnResults = new List<string>();
         public List<string> nmResults = new List<string>();
@@ -18,7 +18,7 @@ namespace BAADTools
 
         public bool filterLocal = false;
 
-        public MainForm()
+        public mainForm()
         {
             InitializeComponent();
         }
@@ -42,24 +42,19 @@ namespace BAADTools
 
         public void drawResults()
         {
-            mainList.Hide();
+            mainList.BeginUpdate();
             mainList.Items.Clear();
-            lbCount.Text = "0";
             foreach (string result in nmResults)
             {
-                if (filterString.Equals("") || result.ToLower().Contains(filterString.ToLower()))
-                {
-                    lbCount.Text = (int.Parse(lbCount.Text) + 1).ToString();
-                    statusBar.Update();
-                    mainList.Items.Add(result);
-                }
+                statusBar.Update();
+                mainList.Items.Add(result);
             }
-            mainList.Show();
+            mainList.EndUpdate();
         }
 
         public void openSelected()
         {
-            new UserForm(this, dnResults[mainList.SelectedIndex]).Show();
+            new userForm(this, dnResults[mainList.SelectedIndex]).Show();
         }
 
         private void queryServer_DoWork(object sender, DoWorkEventArgs e)
@@ -69,10 +64,12 @@ namespace BAADTools
             {
                 filterString = filterString + "*";
             }
-            dsearch.Filter = "(&(objectClass=user)(displayName=*" + filterString + ")(!(objectClass=computer)))";
+            dsearch.Filter = "(&(objectClass=user)(displayName=*" + filterString + ")(!(objectClass=computer)))";//THE ASTERISK IS A PROBLEM
+            dsearch.SearchRoot = new DirectoryEntry(Settings.domainSearchRoot);
+            dsearch.PageSize = 10000;
+            dsearch.PropertiesToLoad.Add("cn");
             dsearch.Sort = new SortOption("cn", SortDirection.Ascending);
             filterString = "";
-            dsearch.CacheResults = false;
             SearchResultCollection results = dsearch.FindAll();
             dnResults.Clear();
             nmResults.Clear();
@@ -109,7 +106,7 @@ namespace BAADTools
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void aboutBAADToolsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -124,7 +121,7 @@ namespace BAADTools
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            new StatusBox().Show();
+            new statusForm().Show();
         }
 
         private void listBox1_DbCLick(object sender, EventArgs e)

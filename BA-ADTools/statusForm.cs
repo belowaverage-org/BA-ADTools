@@ -4,9 +4,9 @@ using System.DirectoryServices.ActiveDirectory;
 
 namespace BAADTools
 {
-    public partial class StatusBox : Form
+    public partial class statusForm : Form
     {
-        public StatusBox()
+        public statusForm()
         {
             InitializeComponent();
         }

@@ -43,6 +43,8 @@ namespace BAADTools
             DirectorySearcher dSearch = new DirectorySearcher();
             dSearch.Filter = "objectClass=group";
             dSearch.Sort = new SortOption("cn", SortDirection.Ascending);
+            dSearch.SearchRoot = new DirectoryEntry(Settings.domainSearchRoot);
+            dSearch.PageSize = 10000;
             dSearch.PropertiesToLoad.Add("cn");
             dSearch.PropertiesToLoad.Add("description");
             SearchResultCollection sResults = dSearch.FindAll();
