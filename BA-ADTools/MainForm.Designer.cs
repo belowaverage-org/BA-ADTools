@@ -79,6 +79,8 @@
             this.userPrincipleNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.queryServer = new System.ComponentModel.BackgroundWorker();
             this.printDialog = new System.Windows.Forms.PrintDialog();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.selectAWorkingOUToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusBar.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -212,7 +214,9 @@
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.filterOptionsToolStripMenuItem,
-            this.displayOptionsToolStripMenuItem});
+            this.displayOptionsToolStripMenuItem,
+            this.toolStripSeparator5,
+            this.selectAWorkingOUToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -233,7 +237,7 @@
             this.addressToolStripMenuItem,
             this.organizationToolStripMenuItem});
             this.filterOptionsToolStripMenuItem.Name = "filterOptionsToolStripMenuItem";
-            this.filterOptionsToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.filterOptionsToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.filterOptionsToolStripMenuItem.Text = "Filter Options...";
             // 
             // toolStripSeparator1
@@ -399,7 +403,7 @@
             this.distinguishedNameToolStripMenuItem,
             this.userPrincipleNameToolStripMenuItem});
             this.displayOptionsToolStripMenuItem.Name = "displayOptionsToolStripMenuItem";
-            this.displayOptionsToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.displayOptionsToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.displayOptionsToolStripMenuItem.Text = "Display Options...";
             // 
             // selectADisplayAttributeToolStripMenuItem
@@ -461,7 +465,19 @@
             // 
             this.printDialog.UseEXDialog = true;
             // 
-            // MainForm
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(184, 6);
+            // 
+            // selectAWorkingOUToolStripMenuItem
+            // 
+            this.selectAWorkingOUToolStripMenuItem.Name = "selectAWorkingOUToolStripMenuItem";
+            this.selectAWorkingOUToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.selectAWorkingOUToolStripMenuItem.Text = "Select a working OU...";
+            this.selectAWorkingOUToolStripMenuItem.Click += new System.EventHandler(this.selectAWorkingOUToolStripMenuItem_Click);
+            // 
+            // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -476,7 +492,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.MaximizeBox = false;
-            this.Name = "MainForm";
+            this.Name = "mainForm";
             this.Text = "BA-ADTools";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.statusBar.ResumeLayout(false);
@@ -539,6 +555,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem aboutBelowAverageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutBAADToolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem selectAWorkingOUToolStripMenuItem;
     }
 }
 
