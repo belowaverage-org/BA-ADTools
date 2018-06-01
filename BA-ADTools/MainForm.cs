@@ -25,7 +25,16 @@ namespace BAADTools
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            queryServer.RunWorkerAsync();
+            runQueryWorker();
+        }
+
+        public void runQueryWorker()
+        {
+            if (!queryServer.IsBusy)
+            {
+                progressBar.Style = ProgressBarStyle.Marquee;
+                queryServer.RunWorkerAsync();
+            }
         }
 
         private void filterBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -33,10 +42,7 @@ namespace BAADTools
             if (e.KeyChar == char.Parse("\r"))
             {
                 filterString = filterBox.Text;
-                if(!queryServer.IsBusy)
-                {
-                    queryServer.RunWorkerAsync();
-                }
+                runQueryWorker();
             }
         }
 
@@ -95,6 +101,10 @@ namespace BAADTools
 
         private void queryServer_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+            if(progressBar.Style == ProgressBarStyle.Marquee)
+            {
+                progressBar.Style = ProgressBarStyle.Continuous;
+            }
             progressBar.Value = e.ProgressPercentage;
             lbCount.Text = liveResultsCount.ToString();
         }
@@ -135,6 +145,11 @@ namespace BAADTools
             {
                 openSelected();
             }
+        }
+
+        private void selectAWorkingOUToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new rootForm().Show();
         }
     }
 }
