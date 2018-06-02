@@ -86,7 +86,7 @@
     <ManifestKeyFile>Signature.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Signature.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>signature.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
@@ -110,11 +110,16 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutBox.cs">
+    <Compile Include="aboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AboutBox.Designer.cs">
-      <DependentUpon>AboutBox.cs</DependentUpon>
+    <Compile Include="aboutBox.Designer.cs">
+      <DependentUpon>aboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ADToolsSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>ADToolsSettings.settings</DependentUpon>
     </Compile>
     <Compile Include="rootForm.cs">
       <SubType>Form</SubType>
@@ -148,8 +153,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AboutBox.resx">
-      <DependentUpon>AboutBox.cs</DependentUpon>
+    <EmbeddedResource Include="aboutBox.resx">
+      <DependentUpon>aboutBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="groupForm.resx">
       <DependentUpon>groupForm.cs</DependentUpon>
@@ -176,20 +181,12 @@
     <EmbeddedResource Include="statusForm.resx">
       <DependentUpon>statusForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Properties\app.manifest" />
-    <None Include="Properties\Settings.settings">
+    <None Include="ADToolsSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <LastGenOutput>ADToolsSettings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <None Include="Signature.pfx" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
+    <None Include="Properties\app.manifest" />
+    <None Include="signature.pfx" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.1">

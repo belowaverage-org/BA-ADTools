@@ -121,7 +121,7 @@ namespace BAADTools
 
         private void aboutBAADToolsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new AboutBox().Show();
+            new aboutBox().Show();
         }
 
         private void aboutBelowAverageToolStripMenuItem_Click(object sender, EventArgs e)

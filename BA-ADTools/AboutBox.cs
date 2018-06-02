@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace BAADTools
 {
-    partial class AboutBox : Form
+    partial class aboutBox : Form
     {
-        public AboutBox()
+        public aboutBox()
         {
             InitializeComponent();
             this.Text = String.Format("About {0}", AssemblyTitle);
