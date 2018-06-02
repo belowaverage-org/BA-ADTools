@@ -43,7 +43,7 @@ namespace BAADTools
             DirectorySearcher dSearch = new DirectorySearcher();
             dSearch.Filter = "objectClass=group";
             dSearch.Sort = new SortOption("cn", SortDirection.Ascending);
-            dSearch.SearchRoot = new DirectoryEntry(Settings.domainSearchRoot);
+            dSearch.SearchRoot = new DirectoryEntry(Program.Settings.domainSearchRoot);
             dSearch.PageSize = 10000;
             dSearch.PropertiesToLoad.Add("cn");
             dSearch.PropertiesToLoad.Add("description");
@@ -55,7 +55,6 @@ namespace BAADTools
             int lastProgReport = -1;
             foreach (SearchResult r in sResults)
             {
-                //DirectoryEntry group = r.GetDirectoryEntry();
                 List<string> nameDesc = new List<string>();
                 nameDesc.Add(r.Properties["cn"][0].ToString());
                 string desc = "";
@@ -65,7 +64,7 @@ namespace BAADTools
                 }
                 nameDesc.Add(desc);
                 allGroups.Add(nameDesc);
-                liveResultsCount = count++;
+                liveResultsCount = ++count;
                 int prog = Convert.ToInt32((Convert.ToDouble(count) / Convert.ToDouble(max)) * 100);
                 if (prog % 10 == 0 && prog != lastProgReport)
                 {

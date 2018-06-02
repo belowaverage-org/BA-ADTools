@@ -23,8 +23,9 @@ namespace BAADTools
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void mainForm_Load(object sender, EventArgs e)
         {
+            Left = Left - 390;
             runQueryWorker();
         }
 
@@ -71,7 +72,7 @@ namespace BAADTools
                 filterString = filterString + "*";
             }
             dsearch.Filter = "(&(objectClass=user)(displayName=*" + filterString + ")(!(objectClass=computer)))";//THE ASTERISK IS A PROBLEM
-            dsearch.SearchRoot = new DirectoryEntry(Settings.domainSearchRoot);
+            dsearch.SearchRoot = new DirectoryEntry(Program.Settings.domainSearchRoot);
             dsearch.PageSize = 10000;
             dsearch.PropertiesToLoad.Add("cn");
             dsearch.Sort = new SortOption("cn", SortDirection.Ascending);
@@ -84,7 +85,7 @@ namespace BAADTools
             int lastProgReport = -1;
             foreach(SearchResult result in results)
             {
-                liveResultsCount = count++;
+                liveResultsCount = ++count;
                 int prog = Convert.ToInt32((Convert.ToDouble(count) / Convert.ToDouble(max)) * 100);
                 if (result.Properties.Contains("cn"))
                 {

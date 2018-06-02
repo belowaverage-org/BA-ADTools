@@ -77,10 +77,10 @@
             this.userNameToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.distinguishedNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userPrincipleNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.queryServer = new System.ComponentModel.BackgroundWorker();
-            this.printDialog = new System.Windows.Forms.PrintDialog();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.selectAWorkingOUToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.queryServer = new System.ComponentModel.BackgroundWorker();
+            this.printDialog = new System.Windows.Forms.PrintDialog();
             this.statusBar.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -454,17 +454,6 @@
             this.userPrincipleNameToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.userPrincipleNameToolStripMenuItem.Text = "User Principle Name";
             // 
-            // queryServer
-            // 
-            this.queryServer.WorkerReportsProgress = true;
-            this.queryServer.DoWork += new System.ComponentModel.DoWorkEventHandler(this.queryServer_DoWork);
-            this.queryServer.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.queryServer_ProgressChanged);
-            this.queryServer.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.queryServer_RunWorkerCompleted);
-            // 
-            // printDialog
-            // 
-            this.printDialog.UseEXDialog = true;
-            // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
@@ -477,10 +466,20 @@
             this.selectAWorkingOUToolStripMenuItem.Text = "Select a working OU...";
             this.selectAWorkingOUToolStripMenuItem.Click += new System.EventHandler(this.selectAWorkingOUToolStripMenuItem_Click);
             // 
+            // queryServer
+            // 
+            this.queryServer.WorkerReportsProgress = true;
+            this.queryServer.DoWork += new System.ComponentModel.DoWorkEventHandler(this.queryServer_DoWork);
+            this.queryServer.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.queryServer_ProgressChanged);
+            this.queryServer.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.queryServer_RunWorkerCompleted);
+            // 
+            // printDialog
+            // 
+            this.printDialog.UseEXDialog = true;
+            // 
             // mainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(249, 427);
             this.Controls.Add(this.statusBar);
@@ -493,8 +492,9 @@
             this.MainMenuStrip = this.menuStrip;
             this.MaximizeBox = false;
             this.Name = "mainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BA-ADTools";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.mainForm_Load);
             this.statusBar.ResumeLayout(false);
             this.statusBar.PerformLayout();
             this.menuStrip.ResumeLayout(false);

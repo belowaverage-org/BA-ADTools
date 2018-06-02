@@ -67,13 +67,17 @@ namespace BAADTools
 
         private void rootForm_Load(object sender, EventArgs e)
         {
+            treeView.BeginUpdate();
             fillNode();
+            treeView.EndUpdate();
         }
 
         private void treeView_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
+            treeView.BeginUpdate();
             e.Node.Nodes.Clear();
             fillNode(e.Node, (DirectoryEntry)e.Node.Tag);
+            treeView.EndUpdate();
         }
 
         private void closeBtn_Click(object sender, EventArgs e)
@@ -83,14 +87,16 @@ namespace BAADTools
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
-            Settings.domainSearchRoot = selectedDirEntry.Path;
+            Program.Settings.domainSearchRoot = selectedDirEntry.Path;
+            Program.Settings.Save();
             Close();
         }
 
         private void topBtn_Click(object sender, EventArgs e)
         {
-            DirectoryEntry RootDirEntry = new DirectoryEntry("LDAP://RootDSE");
-            Settings.domainSearchRoot = "LDAP://" + RootDirEntry.Properties["defaultNamingContext"].Value;
+            Program.Settings.domainSearchRoot = "";
+            Program.generateSettings();
+            Close();
         }
 
         private void treeView_AfterSelect(object sender, TreeViewEventArgs e)

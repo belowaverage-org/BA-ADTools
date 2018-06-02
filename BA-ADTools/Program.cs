@@ -10,9 +10,9 @@ namespace BAADTools
 {
     static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
+
+        public static ADToolsSettings Settings = new ADToolsSettings();
+
         [STAThread]
         static void Main()
         {
@@ -22,14 +22,22 @@ namespace BAADTools
             Application.Run(new mainForm());
         }
 
-        static void generateSettings()
+        public static void generateSettings()
         {
-            DirectoryEntry RootDirEntry = new DirectoryEntry("LDAP://RootDSE");
-            Settings.domainSearchRoot = "LDAP://" + RootDirEntry.Properties["defaultNamingContext"].Value;
+            if(Settings.domainSearchRoot == "")
+            {
+                DirectoryEntry RootDirEntry = new DirectoryEntry("LDAP://RootDSE");
+                Settings.domainSearchRoot = "LDAP://" + RootDirEntry.Properties["defaultNamingContext"].Value;
+                Settings.Save();
+            }
         }
-    }
-    class Settings
-    {
-        public static string domainSearchRoot;
+
+        public static Int64 convertFromLargeInt(object value)
+        {
+            var adsLargeInteger = value;
+            var highPart = (Int32)adsLargeInteger.GetType().InvokeMember("HighPart", System.Reflection.BindingFlags.GetProperty, null, adsLargeInteger, null);
+            var lowPart = (Int32)adsLargeInteger.GetType().InvokeMember("LowPart", System.Reflection.BindingFlags.GetProperty, null, adsLargeInteger, null);
+            return highPart * ((Int64)UInt32.MaxValue + 1) + lowPart;
+        }
     }
 }

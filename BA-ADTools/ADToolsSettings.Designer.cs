@@ -22,5 +22,17 @@ namespace BAADTools {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string domainSearchRoot {
+            get {
+                return ((string)(this["domainSearchRoot"]));
+            }
+            set {
+                this["domainSearchRoot"] = value;
+            }
+        }
     }
 }

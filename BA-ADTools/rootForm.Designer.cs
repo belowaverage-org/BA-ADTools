@@ -38,11 +38,12 @@
             // treeView
             // 
             this.treeView.Dock = System.Windows.Forms.DockStyle.Top;
+            this.treeView.HideSelection = false;
             this.treeView.Location = new System.Drawing.Point(5, 5);
             this.treeView.Name = "treeView";
             this.treeView.ShowNodeToolTips = true;
             this.treeView.Size = new System.Drawing.Size(307, 543);
-            this.treeView.TabIndex = 0;
+            this.treeView.TabIndex = 2;
             this.treeView.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView_BeforeExpand);
             this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterSelect);
             // 
@@ -91,6 +92,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "rootForm";
             this.Padding = new System.Windows.Forms.Padding(5);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Select a working OU...";
             this.Load += new System.EventHandler(this.rootForm_Load);
             this.ResumeLayout(false);

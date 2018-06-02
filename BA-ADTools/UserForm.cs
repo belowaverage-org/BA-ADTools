@@ -79,6 +79,28 @@ namespace BAADTools
             if (userProp["co"].Count != 0)
                 countryBox.Text = userProp["co"].Value.ToString();
 
+            if (userProp["logonCount"].Count != 0)
+                logonCountBox.Text = userProp["logonCount"].Value.ToString();
+
+            if (userProp["thumbnailPhoto"].Count != 0)
+            {
+                Image thumbnailPhoto = (Bitmap)((new ImageConverter()).ConvertFrom(userProp["thumbnailPhoto"].Value));
+                pictureBox.Image = thumbnailPhoto;
+            }
+
+            lockoutLight.ForeColor = Color.Green;
+            if (userProp["lockoutTime"].Count != 0) //Lockout Time is the wrong attrib
+            {
+                long lockoutTime = Program.convertFromLargeInt(userProp["lockoutTime"].Value);
+                if(lockoutTime != 0)
+                {
+                    lockoutLight.ForeColor = Color.Red;
+                }
+            }
+
+
+
+
         }
 
         private void groupToolStripMenuItem_Click(object sender, EventArgs e)

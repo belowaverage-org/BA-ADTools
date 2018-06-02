@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(userForm));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.DNLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,7 +56,7 @@
             this.label25 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
+            this.lockoutLight = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -96,7 +96,7 @@
             this.usernameLb = new System.Windows.Forms.Label();
             this.backgroundProc = new System.ComponentModel.BackgroundWorker();
             this.statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -123,18 +123,18 @@
             this.DNLabel.Size = new System.Drawing.Size(13, 17);
             this.DNLabel.Text = "...";
             // 
-            // pictureBox1
+            // pictureBox
             // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.ErrorImage = null;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(680, 28);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(80, 80);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
+            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox.ErrorImage = null;
+            this.pictureBox.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox.Image")));
+            this.pictureBox.InitialImage = null;
+            this.pictureBox.Location = new System.Drawing.Point(679, 28);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(80, 80);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox.TabIndex = 1;
+            this.pictureBox.TabStop = false;
             // 
             // menuStrip1
             // 
@@ -297,7 +297,7 @@
             this.groupBox1.Controls.Add(this.label25);
             this.groupBox1.Controls.Add(this.label24);
             this.groupBox1.Controls.Add(this.label23);
-            this.groupBox1.Controls.Add(this.label22);
+            this.groupBox1.Controls.Add(this.lockoutLight);
             this.groupBox1.Controls.Add(this.label21);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.label17);
@@ -345,16 +345,16 @@
             this.label23.TabIndex = 14;
             this.label23.Text = "n";
             // 
-            // label22
+            // lockoutLight
             // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Webdings", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.label22.ForeColor = System.Drawing.Color.Silver;
-            this.label22.Location = new System.Drawing.Point(162, 92);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(25, 19);
-            this.label22.TabIndex = 13;
-            this.label22.Text = "n";
+            this.lockoutLight.AutoSize = true;
+            this.lockoutLight.Font = new System.Drawing.Font("Webdings", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.lockoutLight.ForeColor = System.Drawing.Color.Silver;
+            this.lockoutLight.Location = new System.Drawing.Point(162, 92);
+            this.lockoutLight.Name = "lockoutLight";
+            this.lockoutLight.Size = new System.Drawing.Size(25, 19);
+            this.lockoutLight.TabIndex = 13;
+            this.lockoutLight.Text = "n";
             // 
             // label21
             // 
@@ -746,7 +746,7 @@
             this.backgroundProc.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundProc_DoWork);
             this.backgroundProc.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundProc_RunWorkerCompleted);
             // 
-            // UserForm
+            // userForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -757,7 +757,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.nameLb);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Segoe UI Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -765,12 +765,12 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
-            this.Name = "UserForm";
+            this.Name = "userForm";
             this.Text = "Please wait...";
             this.Load += new System.EventHandler(this.UserForm_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -787,7 +787,7 @@
         #endregion
 
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem manageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem disableUserToolStripMenuItem;
@@ -826,7 +826,7 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label lockoutLight;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox countryBox;
         private System.Windows.Forms.TextBox stateBox;
