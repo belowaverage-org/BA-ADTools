@@ -72,7 +72,7 @@ namespace BAADTools
                 filterString = filterString + "*";
             }
             dsearch.Filter = "(&(objectClass=user)(displayName=*" + filterString + ")(!(objectClass=computer)))";//THE ASTERISK IS A PROBLEM
-            dsearch.SearchRoot = new DirectoryEntry(Program.Settings.domainSearchRoot);
+            dsearch.SearchRoot = new DirectoryEntry(BAADTools.Settings.domainSearchRoot);
             dsearch.PageSize = 10000;
             dsearch.PropertiesToLoad.Add("cn");
             dsearch.Sort = new SortOption("cn", SortDirection.Ascending);

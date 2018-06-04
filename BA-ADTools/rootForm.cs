@@ -87,15 +87,15 @@ namespace BAADTools
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
-            Program.Settings.domainSearchRoot = selectedDirEntry.Path;
-            Program.Settings.Save();
+            BAADTools.Settings.domainSearchRoot = selectedDirEntry.Path;
+            BAADTools.Settings.Save();
             Close();
         }
 
         private void topBtn_Click(object sender, EventArgs e)
         {
-            Program.Settings.domainSearchRoot = "";
-            Program.generateSettings();
+            BAADTools.Settings.domainSearchRoot = "";
+            BAADTools.generateSettings();
             Close();
         }
 

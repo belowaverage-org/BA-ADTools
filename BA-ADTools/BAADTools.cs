@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace BAADTools
 {
-    static class Program
+    static class BAADTools
     {
 
         public static ADToolsSettings Settings = new ADToolsSettings();
@@ -26,10 +26,15 @@ namespace BAADTools
         {
             if(Settings.domainSearchRoot == "")
             {
-                DirectoryEntry RootDirEntry = new DirectoryEntry("LDAP://RootDSE");
-                Settings.domainSearchRoot = "LDAP://" + RootDirEntry.Properties["defaultNamingContext"].Value;
+                Settings.domainSearchRoot = rootDirectoryDN();
                 Settings.Save();
             }
+        }
+
+        public static string rootDirectoryDN()
+        {
+            DirectoryEntry RootDirEntry = new DirectoryEntry("LDAP://RootDSE");
+            return "LDAP://" + RootDirEntry.Properties["defaultNamingContext"].Value;
         }
 
         public static Int64 convertFromLargeInt(object value)
@@ -38,6 +43,14 @@ namespace BAADTools
             var highPart = (Int32)adsLargeInteger.GetType().InvokeMember("HighPart", System.Reflection.BindingFlags.GetProperty, null, adsLargeInteger, null);
             var lowPart = (Int32)adsLargeInteger.GetType().InvokeMember("LowPart", System.Reflection.BindingFlags.GetProperty, null, adsLargeInteger, null);
             return highPart * ((Int64)UInt32.MaxValue + 1) + lowPart;
+        }
+
+        public static int isPasswordExpired(string userName)
+        {
+            using (var userEntry = new DirectoryEntry(string.Format("WinNT://{0}/{1},user", Environment.UserDomainName, userName)))
+            {
+                return (int)userEntry.Properties.Cast<PropertyValueCollection>().First(p => p.PropertyName == "PasswordExpired").Value;
+            }
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.DirectoryServices.AccountManagement;
 
 namespace BAADTools
 {
@@ -20,6 +21,12 @@ namespace BAADTools
         public string userDN;
 
         public System.DirectoryServices.PropertyCollection userProp;
+
+        public UserPrincipal userPrinc;
+
+        public DirectoryEntry userEntry;
+
+        public int isPwExpired;
 
         public userForm(Form pf, string dn)
         {
@@ -39,42 +46,29 @@ namespace BAADTools
 
         private void backgroundProc_DoWork(object sender, DoWorkEventArgs e)
         {
-            DirectoryEntry user = new DirectoryEntry(userDN);
-            userProp = user.Properties;
+            userEntry = new DirectoryEntry(userDN);
+            PrincipalContext context = new PrincipalContext(ContextType.Domain);
+            userProp = userEntry.Properties;
+            userPrinc = UserPrincipal.FindByIdentity(context, IdentityType.DistinguishedName, userProp["distinguishedName"].Value.ToString());
+            isPwExpired = BAADTools.isPasswordExpired(userProp["sAMAccountName"].Value.ToString());
         }
 
         private void backgroundProc_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-
-            if (userProp["cn"].Count != 0)
-                Text = nameLb.Text = userProp["cn"].Value.ToString();
             
-            if (userProp["sAMAccountName"].Count != 0)
-                usernameLb.Text = userProp["sAMAccountName"].Value.ToString();
-            
-            if (userProp["givenName"].Count != 0)
-                givenNameBox.Text = userProp["givenName"].Value.ToString();
-
-            if (userProp["initials"].Count != 0)
-                initialsBox.Text = userProp["initials"].Value.ToString();
-
-            if (userProp["sn"].Count != 0)
-                snBox.Text = userProp["sn"].Value.ToString();
-
-            if (userProp["telephoneNumber"].Count != 0)
-                numberBox.Text = userProp["telephoneNumber"].Value.ToString();
-
-            if (userProp["mail"].Count != 0)
-                emailBox.Text = userProp["mail"].Value.ToString();
+            Text = nameLb.Text = userPrinc.DisplayName;
+            usernameLb.Text = userPrinc.SamAccountName;
+            givenNameBox.Text = userPrinc.GivenName;
+            initialsBox.Text = userPrinc.MiddleName;
+            snBox.Text = userPrinc.Surname;
+            numberBox.Text = userPrinc.VoiceTelephoneNumber;
+            emailBox.Text = userPrinc.EmailAddress;
 
             if (userProp["streetAddress"].Count != 0)
                 addressBox.Text = userProp["streetAddress"].Value.ToString();
 
             if (userProp["st"].Count != 0)
                 stateBox.Text = userProp["st"].Value.ToString();
-
-            if (userProp["givenName"].Count != 0)
-                givenNameBox.Text = userProp["givenName"].Value.ToString();
 
             if (userProp["co"].Count != 0)
                 countryBox.Text = userProp["co"].Value.ToString();
@@ -89,15 +83,33 @@ namespace BAADTools
             }
 
             lockoutLight.ForeColor = Color.Green;
-            if (userProp["lockoutTime"].Count != 0) //Lockout Time is the wrong attrib
+            if (userPrinc.IsAccountLockedOut())
             {
-                long lockoutTime = Program.convertFromLargeInt(userProp["lockoutTime"].Value);
-                if(lockoutTime != 0)
+                lockoutLight.ForeColor = Color.Red;
+            }
+
+            enabledLight.ForeColor = Color.Green;
+            if (!userPrinc.Enabled.Value)
+            {
+                enabledLight.ForeColor = Color.Red;
+            }
+
+            expiredLight.ForeColor = Color.Green;
+            if(userPrinc.AccountExpirationDate != null)
+            {
+                DateTime expDate = userPrinc.AccountExpirationDate.Value;
+                int compare = DateTime.Compare(DateTime.Now, expDate);
+                if (compare == 0 || compare > 0)
                 {
-                    lockoutLight.ForeColor = Color.Red;
+                    expiredLight.ForeColor = Color.Red;
                 }
             }
 
+            pChangeLight.ForeColor = Color.Green;
+            if (isPwExpired == 1)
+            {
+                pChangeLight.ForeColor = Color.Red;
+            }
 
 
 
