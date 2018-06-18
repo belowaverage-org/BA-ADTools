@@ -119,5 +119,18 @@ namespace BAADTools
         {
             new groupForm(this).Show();
         }
+
+        private void pictureBox_Paint(object sender, PaintEventArgs e)
+        {
+            float xScale = (float) pictureBox.Width / pictureBox.Image.Width;
+            float yScale = (float) pictureBox.Height / pictureBox.Image.Height;
+            if(xScale > 1 || yScale > 1)
+            {
+                e.Graphics.Clear(Color.White);
+                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                e.Graphics.ScaleTransform(xScale, yScale);
+                e.Graphics.DrawImage(pictureBox.Image, new PointF());
+            }
+        }
     }
 }

@@ -52,6 +52,9 @@
             this.changeEmailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeAddressToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nameLb = new System.Windows.Forms.Label();
+            this.usernameLb = new System.Windows.Forms.Label();
+            this.backgroundProc = new System.ComponentModel.BackgroundWorker();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pChangeLight = new System.Windows.Forms.Label();
             this.expiredLight = new System.Windows.Forms.Label();
@@ -91,16 +94,15 @@
             this.label9 = new System.Windows.Forms.Label();
             this.creationDateBox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.usernameLb = new System.Windows.Forms.Label();
-            this.backgroundProc = new System.ComponentModel.BackgroundWorker();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -109,9 +111,9 @@
             this.statusStrip1.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.DNLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 475);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 439);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(943, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(384, 22);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
@@ -130,12 +132,13 @@
             this.pictureBox.ErrorImage = null;
             this.pictureBox.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox.Image")));
             this.pictureBox.InitialImage = null;
-            this.pictureBox.Location = new System.Drawing.Point(853, 32);
+            this.pictureBox.Location = new System.Drawing.Point(294, 32);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(80, 80);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox.TabIndex = 1;
             this.pictureBox.TabStop = false;
+            this.pictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_Paint);
             // 
             // menuStrip1
             // 
@@ -149,7 +152,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip1.Size = new System.Drawing.Size(943, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(384, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -293,6 +296,35 @@
             this.nameLb.TabIndex = 3;
             this.nameLb.Text = "Please wait...";
             // 
+            // usernameLb
+            // 
+            this.usernameLb.AutoSize = true;
+            this.usernameLb.Font = new System.Drawing.Font("Segoe UI Light", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameLb.Location = new System.Drawing.Point(5, 65);
+            this.usernameLb.Name = "usernameLb";
+            this.usernameLb.Size = new System.Drawing.Size(102, 30);
+            this.usernameLb.TabIndex = 7;
+            this.usernameLb.Text = "Loading...";
+            // 
+            // backgroundProc
+            // 
+            this.backgroundProc.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundProc_DoWork);
+            this.backgroundProc.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundProc_RunWorkerCompleted);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
+            this.flowLayoutPanel1.Controls.Add(this.groupBox1);
+            this.flowLayoutPanel1.Controls.Add(this.groupBox2);
+            this.flowLayoutPanel1.Controls.Add(this.groupBox3);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(28, 3);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(290, 784);
+            this.flowLayoutPanel1.TabIndex = 8;
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.pChangeLight);
@@ -307,7 +339,7 @@
             this.groupBox1.Location = new System.Drawing.Point(10, 0);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(10, 0, 10, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(191, 243);
+            this.groupBox1.Size = new System.Drawing.Size(270, 243);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Account Status";
@@ -317,7 +349,7 @@
             this.pChangeLight.AutoSize = true;
             this.pChangeLight.Font = new System.Drawing.Font("Webdings", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
             this.pChangeLight.ForeColor = System.Drawing.Color.Silver;
-            this.pChangeLight.Location = new System.Drawing.Point(158, 185);
+            this.pChangeLight.Location = new System.Drawing.Point(240, 185);
             this.pChangeLight.Name = "pChangeLight";
             this.pChangeLight.Size = new System.Drawing.Size(25, 19);
             this.pChangeLight.TabIndex = 15;
@@ -328,7 +360,7 @@
             this.expiredLight.AutoSize = true;
             this.expiredLight.Font = new System.Drawing.Font("Webdings", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
             this.expiredLight.ForeColor = System.Drawing.Color.Silver;
-            this.expiredLight.Location = new System.Drawing.Point(158, 138);
+            this.expiredLight.Location = new System.Drawing.Point(240, 138);
             this.expiredLight.Name = "expiredLight";
             this.expiredLight.Size = new System.Drawing.Size(25, 19);
             this.expiredLight.TabIndex = 14;
@@ -339,7 +371,7 @@
             this.lockoutLight.AutoSize = true;
             this.lockoutLight.Font = new System.Drawing.Font("Webdings", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
             this.lockoutLight.ForeColor = System.Drawing.Color.Silver;
-            this.lockoutLight.Location = new System.Drawing.Point(158, 92);
+            this.lockoutLight.Location = new System.Drawing.Point(240, 92);
             this.lockoutLight.Name = "lockoutLight";
             this.lockoutLight.Size = new System.Drawing.Size(25, 19);
             this.lockoutLight.TabIndex = 13;
@@ -350,7 +382,7 @@
             this.enabledLight.AutoSize = true;
             this.enabledLight.Font = new System.Drawing.Font("Webdings", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
             this.enabledLight.ForeColor = System.Drawing.Color.Silver;
-            this.enabledLight.Location = new System.Drawing.Point(158, 42);
+            this.enabledLight.Location = new System.Drawing.Point(240, 42);
             this.enabledLight.Name = "enabledLight";
             this.enabledLight.Size = new System.Drawing.Size(25, 19);
             this.enabledLight.TabIndex = 12;
@@ -415,7 +447,7 @@
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(221, 0);
+            this.groupBox2.Location = new System.Drawing.Point(10, 253);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(10, 0, 10, 10);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(270, 286);
@@ -590,7 +622,7 @@
             this.groupBox3.Controls.Add(this.creationDateBox);
             this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(511, 0);
+            this.groupBox3.Location = new System.Drawing.Point(10, 549);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(10, 0, 10, 10);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(270, 225);
@@ -712,51 +744,41 @@
             this.label10.TabIndex = 0;
             this.label10.Text = "Creation Date";
             // 
-            // usernameLb
+            // tableLayoutPanel1
             // 
-            this.usernameLb.AutoSize = true;
-            this.usernameLb.Font = new System.Drawing.Font("Segoe UI Light", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usernameLb.Location = new System.Drawing.Point(5, 65);
-            this.usernameLb.Name = "usernameLb";
-            this.usernameLb.Size = new System.Drawing.Size(102, 30);
-            this.usernameLb.TabIndex = 7;
-            this.usernameLb.Text = "Loading...";
-            // 
-            // backgroundProc
-            // 
-            this.backgroundProc.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundProc_DoWork);
-            this.backgroundProc.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundProc_RunWorkerCompleted);
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Controls.Add(this.groupBox1);
-            this.flowLayoutPanel1.Controls.Add(this.groupBox2);
-            this.flowLayoutPanel1.Controls.Add(this.groupBox3);
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 118);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(943, 357);
-            this.flowLayoutPanel1.TabIndex = 8;
+            this.tableLayoutPanel1.AutoScroll = true;
+            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 118);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 0, 20, 20);
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 302F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(384, 321);
+            this.tableLayoutPanel1.TabIndex = 9;
             // 
             // userForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(943, 497);
+            this.ClientSize = new System.Drawing.Size(384, 461);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.usernameLb);
             this.Controls.Add(this.nameLb);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.flowLayoutPanel1);
             this.Font = new System.Drawing.Font("Segoe UI Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(400, 400);
             this.Name = "userForm";
             this.Text = "Please wait...";
             this.Load += new System.EventHandler(this.UserForm_Load);
@@ -765,13 +787,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -793,46 +817,7 @@
         private System.Windows.Forms.ToolStripMenuItem setExpirationDateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearExpirationToolStripMenuItem;
         private System.Windows.Forms.Label nameLb;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label usernameLb;
-        private System.Windows.Forms.Label pChangeLight;
-        private System.Windows.Forms.Label expiredLight;
-        private System.Windows.Forms.Label lockoutLight;
-        private System.Windows.Forms.Label enabledLight;
-        private System.Windows.Forms.TextBox countryBox;
-        private System.Windows.Forms.TextBox stateBox;
-        private System.Windows.Forms.TextBox addressBox;
-        private System.Windows.Forms.TextBox emailBox;
-        private System.Windows.Forms.TextBox numberBox;
-        private System.Windows.Forms.TextBox snBox;
-        private System.Windows.Forms.TextBox initialsBox;
-        private System.Windows.Forms.TextBox givenNameBox;
-        private System.Windows.Forms.TextBox logonCountBox;
-        private System.Windows.Forms.TextBox badLogonBox;
-        private System.Windows.Forms.TextBox lastLogonBox;
-        private System.Windows.Forms.TextBox lastPwBox;
-        private System.Windows.Forms.TextBox lastModifiedBox;
-        private System.Windows.Forms.TextBox creationDateBox;
         private System.Windows.Forms.ToolStripMenuItem lockoutStatusToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem personalToolStripMenuItem;
@@ -844,5 +829,45 @@
         private System.Windows.Forms.ToolStripMenuItem groupToolStripMenuItem;
         private System.ComponentModel.BackgroundWorker backgroundProc;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label pChangeLight;
+        private System.Windows.Forms.Label expiredLight;
+        private System.Windows.Forms.Label lockoutLight;
+        private System.Windows.Forms.Label enabledLight;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox countryBox;
+        private System.Windows.Forms.TextBox stateBox;
+        private System.Windows.Forms.TextBox addressBox;
+        private System.Windows.Forms.TextBox emailBox;
+        private System.Windows.Forms.TextBox numberBox;
+        private System.Windows.Forms.TextBox snBox;
+        private System.Windows.Forms.TextBox initialsBox;
+        private System.Windows.Forms.TextBox givenNameBox;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox logonCountBox;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox badLogonBox;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox lastLogonBox;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox lastPwBox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox lastModifiedBox;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox creationDateBox;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
