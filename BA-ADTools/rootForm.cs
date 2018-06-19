@@ -21,6 +21,10 @@ namespace BAADTools
 
         public DirectoryEntry selectedDirEntry;
 
+        public bool mouseDown = false;
+        public int mdX = 0;
+        public int mdY = 0;
+
         public bool fillNode(TreeNode node = null, DirectoryEntry dEntry = null, bool checkForChildren = false)
         {
             TreeView tree = null;
@@ -102,6 +106,32 @@ namespace BAADTools
         private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             selectedDirEntry = (DirectoryEntry)e.Node.Tag;
+        }
+
+        private void titleBar_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            mdX = e.X;
+            mdY = e.Y;
+        }
+
+        private void titleBar_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
+        }
+
+        private void titleBar_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(mouseDown)
+            {
+                Left = e.X - mdX + Left;
+                Top = e.Y - mdY + Top;
+            }
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

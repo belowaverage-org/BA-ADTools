@@ -26,15 +26,15 @@ namespace BAADTools
         private void mainForm_Load(object sender, EventArgs e)
         {
             Left = Left - 390;
-            runQueryWorker();
+            runSearchWorker();
         }
 
-        public void runQueryWorker()
+        public void runSearchWorker()
         {
-            if (!queryServer.IsBusy)
+            if (!searchWorker.IsBusy)
             {
                 progressBar.Style = ProgressBarStyle.Marquee;
-                queryServer.RunWorkerAsync();
+                searchWorker.RunWorkerAsync();
             }
         }
 
@@ -43,7 +43,7 @@ namespace BAADTools
             if (e.KeyChar == char.Parse("\r"))
             {
                 filterString = filterBox.Text;
-                runQueryWorker();
+                runSearchWorker();
             }
         }
 
@@ -64,7 +64,7 @@ namespace BAADTools
             new userForm(this, dnResults[mainList.SelectedIndex]).Show();
         }
 
-        private void queryServer_DoWork(object sender, DoWorkEventArgs e)
+        private void searchWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             DirectorySearcher dsearch = new DirectorySearcher();
             if (!filterString.Equals(""))
@@ -95,12 +95,12 @@ namespace BAADTools
                 if(prog % 5 == 0 && prog != lastProgReport)
                 {
                     lastProgReport = prog;
-                    queryServer.ReportProgress(prog);
+                    searchWorker.ReportProgress(prog);
                 }
             }
         }
 
-        private void queryServer_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void searchWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             if(progressBar.Style == ProgressBarStyle.Marquee)
             {
@@ -110,9 +110,14 @@ namespace BAADTools
             lbCount.Text = liveResultsCount.ToString();
         }
 
-        private void queryServer_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void searchWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             drawResults();
+            if (mainList.Items.Count == 1)
+            {
+                mainList.SetSelected(0, true);
+                openSelected();
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
