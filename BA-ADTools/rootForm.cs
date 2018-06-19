@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.DirectoryServices;
-using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace BAADTools
@@ -62,7 +55,6 @@ namespace BAADTools
             }
             foreach (DirectoryEntry childDirEntry in dEntry.Children)
             {
-                Thread.Sleep(100);
                 if (childDirEntry.SchemaClassName == "organizationalUnit" || childDirEntry.SchemaClassName == "Container")
                 {
                     if (checkForChildren)
