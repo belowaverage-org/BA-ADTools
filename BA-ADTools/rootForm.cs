@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.DirectoryServices;
 using System.Diagnostics;
 using System.Windows.Forms;
@@ -20,10 +20,33 @@ namespace BAADTools
         }
 
         public DirectoryEntry selectedDirEntry;
-
         public bool mouseDown = false;
         public int mdX = 0;
         public int mdY = 0;
+
+        public delegate TreeNode addDelegate(TreeNodeCollection nodeCollection, string treeNodeName);
+        public delegate void clearTreeDelegate(TreeNode node, int action);
+
+        public void clearTree(TreeNode node, int action)
+        {
+            if(action == 0)
+            {
+                node.Nodes.Clear();
+                node.Nodes.Add("Loading...");
+                treeView.Refresh();
+                treeView.BeginUpdate();
+            }
+            if(action == 1)
+            {
+                node.FirstNode.Remove();
+                treeView.EndUpdate();
+            }
+        }
+
+        public TreeNode addTreeNode(TreeNodeCollection nodeCollection, string treeNodeName)
+        {
+            return nodeCollection.Add(treeNodeName);
+        }
 
         public bool fillNode(TreeNode node = null, DirectoryEntry dEntry = null, bool checkForChildren = false)
         {
@@ -33,23 +56,24 @@ namespace BAADTools
             {
                 dEntry = new DirectoryEntry();
             }
-            if(node == null)
+            if (node == null)
             {
                 tree = treeView;
             }
             foreach (DirectoryEntry childDirEntry in dEntry.Children)
             {
+                Thread.Sleep(100);
                 if (childDirEntry.SchemaClassName == "organizationalUnit" || childDirEntry.SchemaClassName == "Container")
                 {
-                    if(checkForChildren)
+                    if (checkForChildren)
                     {
                         hasChildren = true;
                         break;
                     }
-                    if(childDirEntry.Properties["name"].Count != 0)
+                    if (childDirEntry.Properties["name"].Count != 0)
                     {
                         TreeNodeCollection treeNodes;
-                        if(tree == null)
+                        if (tree == null)
                         {
                             treeNodes = node.Nodes;
                         }
@@ -57,31 +81,41 @@ namespace BAADTools
                         {
                             treeNodes = tree.Nodes;
                         }
-                        TreeNode childTreeNode = treeNodes.Add(childDirEntry.Properties["name"][0].ToString());
+                        object[] args = new object[2];
+                        args[0] = treeNodes;
+                        args[1] = childDirEntry.Properties["name"][0].ToString();
+                        IAsyncResult result = treeView.BeginInvoke(new addDelegate(addTreeNode), args);
+                        TreeNode childTreeNode = (TreeNode)treeView.EndInvoke(result);
                         childTreeNode.Tag = childDirEntry;
                         if (fillNode(null, childDirEntry, true))
                         {
-                            childTreeNode.Nodes.Add("");
+                            treeView.Invoke(new addDelegate(addTreeNode), new object[] { childTreeNode.Nodes, "" });
                         }
                     }
                 }
+            }
+            if(node != null)
+            {
+                treeView.Invoke(new clearTreeDelegate(clearTree), new object[] { node, 1 });
             }
             return hasChildren;
         }
 
         private void rootForm_Load(object sender, EventArgs e)
         {
-            treeView.BeginUpdate();
-            fillNode();
-            treeView.EndUpdate();
+            treeWorker.RunWorkerAsync();
         }
 
         private void treeView_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
-            treeView.BeginUpdate();
-            e.Node.Nodes.Clear();
-            fillNode(e.Node, (DirectoryEntry)e.Node.Tag);
-            treeView.EndUpdate();
+            if(treeWorker.IsBusy)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                treeWorker.RunWorkerAsync(new object[] { e.Node, (DirectoryEntry)e.Node.Tag });
+            }
         }
 
         private void closeBtn_Click(object sender, EventArgs e)
@@ -122,7 +156,7 @@ namespace BAADTools
 
         private void titleBar_MouseMove(object sender, MouseEventArgs e)
         {
-            if(mouseDown)
+            if (mouseDown)
             {
                 Left = e.X - mdX + Left;
                 Top = e.Y - mdY + Top;
@@ -132,6 +166,20 @@ namespace BAADTools
         private void exitButton_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void treeWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            TreeNode node = null;
+            DirectoryEntry entry = null;
+            if (e.Argument != null)
+            {
+                object[] args = (object[])e.Argument;
+                node = (TreeNode)args[0];
+                entry = (DirectoryEntry)args[1];
+                treeView.Invoke(new clearTreeDelegate(clearTree), new object[] { node, 0 });
+            }
+            fillNode(node, entry);
         }
     }
 }

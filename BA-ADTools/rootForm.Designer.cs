@@ -34,12 +34,12 @@
             this.cancelBtn = new System.Windows.Forms.Button();
             this.topBtn = new System.Windows.Forms.Button();
             this.windowIcon = new System.Windows.Forms.PictureBox();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.windowBody = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.borderColor = new System.Windows.Forms.PictureBox();
             this.titleBar = new System.Windows.Forms.PictureBox();
             this.exitButton = new System.Windows.Forms.Button();
+            this.treeWorker = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.windowIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.windowBody)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.borderColor)).BeginInit();
@@ -166,6 +166,10 @@
             this.exitButton.UseVisualStyleBackColor = false;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
+            // treeWorker
+            // 
+            this.treeWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.treeWorker_DoWork);
+            // 
             // rootForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -205,11 +209,11 @@
         private System.Windows.Forms.Button cancelBtn;
         private System.Windows.Forms.Button topBtn;
         private System.Windows.Forms.PictureBox windowIcon;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.PictureBox windowBody;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox borderColor;
         private System.Windows.Forms.PictureBox titleBar;
         private System.Windows.Forms.Button exitButton;
+        private System.ComponentModel.BackgroundWorker treeWorker;
     }
 }
