@@ -37,9 +37,6 @@ namespace BAADTools
 
         private void UserForm_Load(object sender, EventArgs e)
         {
-            Point parentFormCords = parentForm.Location;
-            parentFormCords.X = parentFormCords.X + parentForm.Width;
-            Location = parentFormCords;
             DNLabel.Text = userDN;
             backgroundProc.RunWorkerAsync();
         }
@@ -81,19 +78,16 @@ namespace BAADTools
                 Image thumbnailPhoto = (Bitmap)((new ImageConverter()).ConvertFrom(userProp["thumbnailPhoto"].Value));
                 pictureBox.Image = thumbnailPhoto;
             }
-
             lockoutLight.ForeColor = Color.Green;
             if (userPrinc.IsAccountLockedOut())
             {
                 lockoutLight.ForeColor = Color.Red;
             }
-
             enabledLight.ForeColor = Color.Green;
             if (!userPrinc.Enabled.Value)
             {
                 enabledLight.ForeColor = Color.Red;
             }
-
             expiredLight.ForeColor = Color.Green;
             if(userPrinc.AccountExpirationDate != null)
             {
@@ -104,20 +98,18 @@ namespace BAADTools
                     expiredLight.ForeColor = Color.Red;
                 }
             }
-
             pChangeLight.ForeColor = Color.Green;
             if (isPwExpired == 1)
             {
                 pChangeLight.ForeColor = Color.Red;
             }
-
-
-
         }
 
         private void groupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new groupForm(this).Show();
+            Form groupForm = new groupForm(this);
+            groupForm.MdiParent = MdiParent;
+            groupForm.Show();
         }
 
         private void pictureBox_Paint(object sender, PaintEventArgs e)

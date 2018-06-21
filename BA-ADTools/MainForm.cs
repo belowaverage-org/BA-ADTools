@@ -13,21 +13,25 @@ namespace BAADTools
         public List<string> nmResults = new List<string>();
 
         public int liveResultsCount = 0;
-
         public string filterString = "";
-
         public bool filterLocal = false;
+        public bool splitterMouseDown = false;
 
         public mainForm()
         {
             InitializeComponent();
+            runSearchWorker();
+            foreach (Control control in this.Controls)
+            {
+                MdiClient client = control as MdiClient;
+                if (!(client == null))
+                {
+                    client.BackColor = System.Drawing.Color.White;
+                    break;
+                }
+            }
         }
 
-        private void mainForm_Load(object sender, EventArgs e)
-        {
-            Left = Left - 390;
-            runSearchWorker();
-        }
 
         public void runSearchWorker()
         {
@@ -61,7 +65,9 @@ namespace BAADTools
 
         public void openSelected()
         {
-            new userForm(this, dnResults[mainList.SelectedIndex]).Show();
+            Form userForm = new userForm(this, dnResults[mainList.SelectedIndex]);
+            userForm.MdiParent = this;
+            userForm.Show();
         }
 
         private void searchWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -143,6 +149,10 @@ namespace BAADTools
         private void listBox1_DbCLick(object sender, EventArgs e)
         {
             openSelected();
+            if(instrucLbl.Visible)
+            {
+                instrucLbl.Visible = false;
+            }
         }
 
         private void listBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -158,5 +168,54 @@ namespace BAADTools
             new rootForm().Show();
         }
 
+        private void splitter_MouseDown(object sender, MouseEventArgs e)
+        {
+            splitterMouseDown = true;
+        }
+
+        private void splitter_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (splitterMouseDown)
+            {
+                splitter.Width = e.X + 3;
+                filterBox.Width = mainList.Width = e.X;
+            }
+        }
+
+        private void splitter_MouseUp(object sender, MouseEventArgs e)
+        {
+            splitterMouseDown = false;
+        }
+
+        private void closeAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (Form form in MdiChildren)
+            {
+                form.Close();
+            }
+        }
+
+        private void minimizeAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (Form form in MdiChildren)
+            {
+                form.WindowState = FormWindowState.Minimized;
+            }
+        }
+
+        private void verticalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.TileVertical);
+        }
+
+        private void horizontalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.TileHorizontal);
+        }
+
+        private void cascadeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.Cascade);
+        }
     }
 }

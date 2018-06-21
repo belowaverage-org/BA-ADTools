@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(userForm));
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.DNLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -95,35 +95,41 @@
             this.creationDateBox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.statusStrip1.SuspendLayout();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
-            this.menuStrip1.SuspendLayout();
+            this.menuStrip.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // statusStrip1
+            // statusStrip
             // 
-            this.statusStrip1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.statusStrip1.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusStrip.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.statusStrip.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.DNLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 439);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(384, 22);
-            this.statusStrip1.SizingGrip = false;
-            this.statusStrip1.TabIndex = 0;
-            this.statusStrip1.Text = "statusStrip1";
+            this.statusStrip.Location = new System.Drawing.Point(0, 407);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(914, 22);
+            this.statusStrip.SizingGrip = false;
+            this.statusStrip.TabIndex = 0;
             // 
             // DNLabel
             // 
+            this.DNLabel.AutoToolTip = true;
+            this.DNLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.DNLabel.Font = new System.Drawing.Font("Segoe UI Semilight", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DNLabel.Name = "DNLabel";
-            this.DNLabel.Size = new System.Drawing.Size(13, 17);
+            this.DNLabel.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
+            this.DNLabel.Size = new System.Drawing.Size(899, 17);
+            this.DNLabel.Spring = true;
             this.DNLabel.Text = "...";
+            this.DNLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pictureBox
             // 
@@ -132,7 +138,7 @@
             this.pictureBox.ErrorImage = null;
             this.pictureBox.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox.Image")));
             this.pictureBox.InitialImage = null;
-            this.pictureBox.Location = new System.Drawing.Point(294, 32);
+            this.pictureBox.Location = new System.Drawing.Point(827, 7);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(80, 80);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -140,21 +146,22 @@
             this.pictureBox.TabStop = false;
             this.pictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_Paint);
             // 
-            // menuStrip1
+            // menuStrip
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.menuStrip.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.refreshToolStripMenuItem,
             this.groupToolStripMenuItem,
             this.manageToolStripMenuItem,
             this.personalToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip1.Size = new System.Drawing.Size(384, 24);
-            this.menuStrip1.TabIndex = 2;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.menuStrip.Size = new System.Drawing.Size(384, 24);
+            this.menuStrip.TabIndex = 2;
+            this.menuStrip.Text = "menuStrip1";
+            this.menuStrip.Visible = false;
             // 
             // refreshToolStripMenuItem
             // 
@@ -289,8 +296,9 @@
             // nameLb
             // 
             this.nameLb.AutoSize = true;
+            this.nameLb.BackColor = System.Drawing.Color.WhiteSmoke;
             this.nameLb.Font = new System.Drawing.Font("Segoe UI Light", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameLb.Location = new System.Drawing.Point(2, 28);
+            this.nameLb.Location = new System.Drawing.Point(4, 9);
             this.nameLb.Name = "nameLb";
             this.nameLb.Size = new System.Drawing.Size(159, 37);
             this.nameLb.TabIndex = 3;
@@ -299,8 +307,9 @@
             // usernameLb
             // 
             this.usernameLb.AutoSize = true;
+            this.usernameLb.BackColor = System.Drawing.Color.WhiteSmoke;
             this.usernameLb.Font = new System.Drawing.Font("Segoe UI Light", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usernameLb.Location = new System.Drawing.Point(5, 65);
+            this.usernameLb.Location = new System.Drawing.Point(7, 49);
             this.usernameLb.Name = "usernameLb";
             this.usernameLb.Size = new System.Drawing.Size(102, 30);
             this.usernameLb.TabIndex = 7;
@@ -320,9 +329,9 @@
             this.flowLayoutPanel1.Controls.Add(this.groupBox1);
             this.flowLayoutPanel1.Controls.Add(this.groupBox2);
             this.flowLayoutPanel1.Controls.Add(this.groupBox3);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(28, 3);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(290, 784);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(870, 296);
             this.flowLayoutPanel1.TabIndex = 8;
             // 
             // groupBox1
@@ -392,7 +401,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(6, 189);
+            this.label17.Location = new System.Drawing.Point(8, 189);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(146, 15);
             this.label17.TabIndex = 9;
@@ -402,7 +411,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(6, 142);
+            this.label18.Location = new System.Drawing.Point(8, 142);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(94, 15);
             this.label18.TabIndex = 8;
@@ -412,7 +421,7 @@
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(6, 96);
+            this.label19.Location = new System.Drawing.Point(8, 96);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(84, 15);
             this.label19.TabIndex = 7;
@@ -422,7 +431,7 @@
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(6, 46);
+            this.label20.Location = new System.Drawing.Point(8, 46);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(84, 15);
             this.label20.TabIndex = 6;
@@ -447,7 +456,7 @@
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(10, 253);
+            this.groupBox2.Location = new System.Drawing.Point(300, 0);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(10, 0, 10, 10);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(270, 286);
@@ -622,7 +631,7 @@
             this.groupBox3.Controls.Add(this.creationDateBox);
             this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(10, 549);
+            this.groupBox3.Location = new System.Drawing.Point(590, 0);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(10, 0, 10, 10);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(270, 225);
@@ -754,39 +763,52 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 118);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 102);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 0, 20, 20);
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 302F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(384, 321);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(914, 305);
             this.tableLayoutPanel1.TabIndex = 9;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(914, 94);
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
             // 
             // userForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(384, 461);
+            this.ClientSize = new System.Drawing.Size(914, 429);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.usernameLb);
             this.Controls.Add(this.nameLb);
-            this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.statusStrip);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.menuStrip);
             this.Font = new System.Drawing.Font("Segoe UI Semilight", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.menuStrip;
             this.MinimumSize = new System.Drawing.Size(400, 400);
             this.Name = "userForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Please wait...";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.UserForm_Load);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -796,6 +818,7 @@
             this.groupBox3.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -803,9 +826,9 @@
 
         #endregion
 
-        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem manageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem disableUserToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem enableAccountToolStripMenuItem;
@@ -869,5 +892,6 @@
         private System.Windows.Forms.TextBox creationDateBox;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
