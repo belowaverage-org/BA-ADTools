@@ -16,20 +16,45 @@ namespace BAADTools
     {
         public List<List<string>> allGroups = new List<List<string>>();
 
+        public List<List<string>> usersGroups = new List<List<string>>();
+
         public int liveResultsCount = 0;
 
         public Form parent;
 
-        public groupForm(Form p)
+        public DirectoryEntry user;
+
+        public groupForm(Form p, DirectoryEntry u)
         {
             InitializeComponent();
+            Text = "Group Management - " + u.Properties["displayName"].Value;
             parent = p;
+            user = u;
         }
         
         public void reloadGroups()
         {
             progressBar.Style = ProgressBarStyle.Marquee;
             bgInit.RunWorkerAsync();
+        }
+
+        public void filterGroups()
+        {
+            int count = 0;
+            string filterQuery = filterBox.Text.ToLower();
+            lbCount.Text = liveResultsCount.ToString();
+            allGroupsList.BeginUpdate();
+            allGroupsList.Items.Clear();
+            foreach (List<string> group in allGroups)
+            {
+                if(group[0].ToLower().Contains(filterQuery) || group[1].ToLower().Contains(filterQuery) || filterQuery == "")
+                {
+                    count++;
+                    allGroupsList.Items.Add(group[0]).SubItems.Add(group[1]);
+                    lbCount.Text = count.ToString();
+                }
+            }
+            allGroupsList.EndUpdate();
         }
 
         private void groupForm_Load(object sender, EventArgs e)
@@ -86,14 +111,7 @@ namespace BAADTools
 
         private void bgInit_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            lbCount.Text = liveResultsCount.ToString();
-            groupsList1.BeginUpdate();
-            groupsList1.Items.Clear();
-            foreach (List<string> group in allGroups)
-            {
-                groupsList1.Items.Add(group[0]).SubItems.Add(group[1]);
-            }
-            groupsList1.EndUpdate();
+            filterGroups();
         }
 
         private void reloadBtn_Click(object sender, EventArgs e)
@@ -112,6 +130,11 @@ namespace BAADTools
         private void groupForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             parent.Enabled = true;
+        }
+
+        private void filterBox_TextChanged(object sender, EventArgs e)
+        {
+            filterGroups();
         }
     }
 }

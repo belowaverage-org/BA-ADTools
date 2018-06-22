@@ -658,6 +658,7 @@
             // 
             // splitter
             // 
+            this.splitter.BackColor = System.Drawing.Color.WhiteSmoke;
             this.splitter.Location = new System.Drawing.Point(0, 23);
             this.splitter.Name = "splitter";
             this.splitter.Size = new System.Drawing.Size(181, 438);
@@ -670,9 +671,11 @@
             // instrucLbl
             // 
             this.instrucLbl.AutoEllipsis = true;
+            this.instrucLbl.BackColor = System.Drawing.Color.WhiteSmoke;
             this.instrucLbl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.instrucLbl.Font = new System.Drawing.Font("Segoe UI Semilight", 16F);
             this.instrucLbl.Location = new System.Drawing.Point(181, 23);
+            this.instrucLbl.Margin = new System.Windows.Forms.Padding(0);
             this.instrucLbl.Name = "instrucLbl";
             this.instrucLbl.Size = new System.Drawing.Size(919, 438);
             this.instrucLbl.TabIndex = 11;
@@ -697,6 +700,7 @@
             this.Name = "mainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BA-ADTools";
+            this.MdiChildActivate += new System.EventHandler(this.mainForm_MdiChildActivate);
             this.statusBar.ResumeLayout(false);
             this.statusBar.PerformLayout();
             this.menuStrip.ResumeLayout(false);
@@ -781,7 +785,6 @@
         private System.Windows.Forms.ToolStripMenuItem arrangeAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem verticalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem horizontalToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
         private System.Windows.Forms.ToolStripMenuItem cascadeToolStripMenuItem;
     }
 }

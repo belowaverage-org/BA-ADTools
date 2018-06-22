@@ -37,7 +37,6 @@ namespace BAADTools
 
         private void UserForm_Load(object sender, EventArgs e)
         {
-            DNLabel.Text = userDN;
             backgroundProc.RunWorkerAsync();
         }
 
@@ -107,7 +106,7 @@ namespace BAADTools
 
         private void groupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form groupForm = new groupForm(this);
+            Form groupForm = new groupForm(this, userEntry);
             groupForm.MdiParent = MdiParent;
             groupForm.Show();
         }

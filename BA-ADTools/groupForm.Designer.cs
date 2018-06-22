@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(groupForm));
-            this.groupsList1 = new System.Windows.Forms.ListView();
+            this.allGroupsList = new System.Windows.Forms.ListView();
             this.cnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.descHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupList2 = new System.Windows.Forms.ListView();
@@ -53,23 +53,23 @@
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupsList1
+            // allGroupsList
             // 
-            this.groupsList1.Activation = System.Windows.Forms.ItemActivation.OneClick;
-            this.groupsList1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.allGroupsList.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.allGroupsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.cnHeader,
             this.descHeader});
-            this.groupsList1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupsList1.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupsList1.FullRowSelect = true;
-            this.groupsList1.Location = new System.Drawing.Point(3, 3);
-            this.groupsList1.MultiSelect = false;
-            this.groupsList1.Name = "groupsList1";
-            this.groupsList1.ShowItemToolTips = true;
-            this.groupsList1.Size = new System.Drawing.Size(315, 333);
-            this.groupsList1.TabIndex = 0;
-            this.groupsList1.UseCompatibleStateImageBehavior = false;
-            this.groupsList1.View = System.Windows.Forms.View.Details;
+            this.allGroupsList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.allGroupsList.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.allGroupsList.FullRowSelect = true;
+            this.allGroupsList.Location = new System.Drawing.Point(3, 3);
+            this.allGroupsList.MultiSelect = false;
+            this.allGroupsList.Name = "allGroupsList";
+            this.allGroupsList.ShowItemToolTips = true;
+            this.allGroupsList.Size = new System.Drawing.Size(316, 282);
+            this.allGroupsList.TabIndex = 0;
+            this.allGroupsList.UseCompatibleStateImageBehavior = false;
+            this.allGroupsList.View = System.Windows.Forms.View.Details;
             // 
             // cnHeader
             // 
@@ -90,11 +90,11 @@
             this.groupList2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupList2.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupList2.FullRowSelect = true;
-            this.groupList2.Location = new System.Drawing.Point(374, 3);
+            this.groupList2.Location = new System.Drawing.Point(375, 3);
             this.groupList2.MultiSelect = false;
             this.groupList2.Name = "groupList2";
             this.groupList2.ShowItemToolTips = true;
-            this.groupList2.Size = new System.Drawing.Size(316, 333);
+            this.groupList2.Size = new System.Drawing.Size(317, 282);
             this.groupList2.TabIndex = 1;
             this.groupList2.UseCompatibleStateImageBehavior = false;
             this.groupList2.View = System.Windows.Forms.View.Details;
@@ -139,7 +139,7 @@
             this.applyBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.applyBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.applyBtn.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.applyBtn.Location = new System.Drawing.Point(636, 380);
+            this.applyBtn.Location = new System.Drawing.Point(638, 329);
             this.applyBtn.Name = "applyBtn";
             this.applyBtn.Size = new System.Drawing.Size(64, 23);
             this.applyBtn.TabIndex = 4;
@@ -151,7 +151,7 @@
             this.cancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cancelBtn.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelBtn.Location = new System.Drawing.Point(566, 380);
+            this.cancelBtn.Location = new System.Drawing.Point(568, 329);
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(64, 23);
             this.cancelBtn.TabIndex = 5;
@@ -164,7 +164,7 @@
             this.saveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.saveBtn.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveBtn.Location = new System.Drawing.Point(496, 380);
+            this.saveBtn.Location = new System.Drawing.Point(498, 329);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(64, 23);
             this.saveBtn.TabIndex = 6;
@@ -174,7 +174,7 @@
             // progressBar
             // 
             this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.progressBar.Location = new System.Drawing.Point(7, 382);
+            this.progressBar.Location = new System.Drawing.Point(7, 331);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(121, 21);
             this.progressBar.TabIndex = 7;
@@ -186,8 +186,9 @@
             this.filterBox.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.filterBox.Location = new System.Drawing.Point(43, 6);
             this.filterBox.Name = "filterBox";
-            this.filterBox.Size = new System.Drawing.Size(657, 23);
+            this.filterBox.Size = new System.Drawing.Size(659, 23);
             this.filterBox.TabIndex = 8;
+            this.filterBox.TextChanged += new System.EventHandler(this.filterBox_TextChanged);
             // 
             // label1
             // 
@@ -204,7 +205,7 @@
             this.reloadBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.reloadBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.reloadBtn.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.reloadBtn.Location = new System.Drawing.Point(370, 380);
+            this.reloadBtn.Location = new System.Drawing.Point(428, 329);
             this.reloadBtn.Name = "reloadBtn";
             this.reloadBtn.Size = new System.Drawing.Size(64, 23);
             this.reloadBtn.TabIndex = 10;
@@ -217,7 +218,7 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(136, 385);
+            this.label2.Location = new System.Drawing.Point(136, 334);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(42, 15);
             this.label2.TabIndex = 11;
@@ -228,7 +229,7 @@
             this.lbCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbCount.AutoSize = true;
             this.lbCount.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCount.Location = new System.Drawing.Point(176, 385);
+            this.lbCount.Location = new System.Drawing.Point(176, 334);
             this.lbCount.Name = "lbCount";
             this.lbCount.Size = new System.Drawing.Size(13, 15);
             this.lbCount.TabIndex = 12;
@@ -251,14 +252,14 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.groupList2, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.groupsList1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.allGroupsList, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(7, 35);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(693, 339);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(695, 288);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
             // flowLayoutPanel1
@@ -267,7 +268,7 @@
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Controls.Add(this.button2);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(327, 132);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(328, 106);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(37, 75);
             this.flowLayoutPanel1.TabIndex = 2;
@@ -277,7 +278,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(707, 409);
+            this.ClientSize = new System.Drawing.Size(709, 358);
             this.Controls.Add(this.lbCount);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.reloadBtn);
@@ -293,7 +294,7 @@
             this.MinimumSize = new System.Drawing.Size(560, 259);
             this.Name = "groupForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Group Management - Username Goes Here";
+            this.Text = "Group Management - USERNAME";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.groupForm_FormClosed);
             this.Load += new System.EventHandler(this.groupForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -306,7 +307,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView groupsList1;
+        private System.Windows.Forms.ListView allGroupsList;
         private System.Windows.Forms.ColumnHeader cnHeader;
         private System.Windows.Forms.ColumnHeader descHeader;
         private System.Windows.Forms.ListView groupList2;

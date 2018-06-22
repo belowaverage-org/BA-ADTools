@@ -16,6 +16,9 @@ namespace BAADTools
         public string filterString = "";
         public bool filterLocal = false;
         public bool splitterMouseDown = false;
+        public bool rootFormClosed = true;
+
+        public Form rootForm;
 
         public mainForm()
         {
@@ -31,7 +34,6 @@ namespace BAADTools
                 }
             }
         }
-
 
         public void runSearchWorker()
         {
@@ -68,6 +70,7 @@ namespace BAADTools
             Form userForm = new userForm(this, dnResults[mainList.SelectedIndex]);
             userForm.MdiParent = this;
             userForm.Show();
+            LayoutMdi(MdiLayout.TileVertical);
         }
 
         private void searchWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -149,10 +152,6 @@ namespace BAADTools
         private void listBox1_DbCLick(object sender, EventArgs e)
         {
             openSelected();
-            if(instrucLbl.Visible)
-            {
-                instrucLbl.Visible = false;
-            }
         }
 
         private void listBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -165,7 +164,22 @@ namespace BAADTools
 
         private void selectAWorkingOUToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new rootForm().Show();
+            if(rootFormClosed) {
+                rootForm = new rootForm();
+                rootForm.MdiParent = this;
+                rootForm.Show();
+                rootForm.FormClosed += RootForm_FormClosed;
+                rootFormClosed = false;
+            }
+            else
+            {
+                rootForm.Focus();
+            }
+        }
+
+        private void RootForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            rootFormClosed = true;
         }
 
         private void splitter_MouseDown(object sender, MouseEventArgs e)
@@ -216,6 +230,25 @@ namespace BAADTools
         private void cascadeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LayoutMdi(MdiLayout.Cascade);
+        }
+
+        private void mainForm_MdiChildActivate(object sender, EventArgs e)
+        {
+            MdiChildren[0].FormClosed += MainForm_FormClosed;
+            MdiChildren[0].Shown += MainForm_Shown;
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            instrucLbl.Visible = false;
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (MdiChildren.GetLength(0) == 1)
+            {
+                instrucLbl.Visible = true;
+            }
         }
     }
 }
