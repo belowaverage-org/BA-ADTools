@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.DirectoryServices;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace BAADTools
@@ -17,22 +18,21 @@ namespace BAADTools
         public bool filterLocal = false;
         public bool splitterMouseDown = false;
         public bool rootFormClosed = true;
+        public FormWindowState OldFormWindowState;
 
         public Form rootForm;
+
+        public Timer mdiActivateTimer = new Timer();
+        public static Timer mdiLayoutTimer = new Timer();
 
         public mainForm()
         {
             InitializeComponent();
             runSearchWorker();
-            foreach (Control control in this.Controls)
-            {
-                MdiClient client = control as MdiClient;
-                if (!(client == null))
-                {
-                    client.BackColor = System.Drawing.Color.White;
-                    break;
-                }
-            }
+            mdiActivateTimer.Interval = 1;
+            mdiActivateTimer.Tick += MdiActivateTimer_Tick;
+            mdiLayoutTimer.Interval = 1;
+            mdiLayoutTimer.Tick += MdiLayoutTimer_Tick;
         }
 
         public void runSearchWorker()
@@ -62,6 +62,10 @@ namespace BAADTools
                 statusBar.Update();
                 mainList.Items.Add(result);
             }
+            if(mainList.Items.Count != 0)
+            {
+                mainList.SetSelected(0, true);
+            }
             mainList.EndUpdate();
         }
 
@@ -70,6 +74,16 @@ namespace BAADTools
             Form userForm = new userForm(this, dnResults[mainList.SelectedIndex]);
             userForm.MdiParent = this;
             userForm.Show();
+        }
+
+        public static void sortMdiWindowsBasedOnSettings()
+        {
+            mdiLayoutTimer.Start();
+        }
+
+        private void MdiLayoutTimer_Tick(object sender, EventArgs e)
+        {
+            mdiLayoutTimer.Stop();
             LayoutMdi(MdiLayout.TileVertical);
         }
 
@@ -199,6 +213,7 @@ namespace BAADTools
         private void splitter_MouseUp(object sender, MouseEventArgs e)
         {
             splitterMouseDown = false;
+            sortMdiWindowsBasedOnSettings();
         }
 
         private void closeAllToolStripMenuItem_Click(object sender, EventArgs e)
@@ -234,21 +249,37 @@ namespace BAADTools
 
         private void mainForm_MdiChildActivate(object sender, EventArgs e)
         {
-            MdiChildren[0].FormClosed += MainForm_FormClosed;
-            MdiChildren[0].Shown += MainForm_Shown;
+            mdiActivateTimer.Start();
         }
 
-        private void MainForm_Shown(object sender, EventArgs e)
+        private void MdiActivateTimer_Tick(object sender, EventArgs e)
         {
-            instrucLbl.Visible = false;
-        }
-
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (MdiChildren.GetLength(0) == 1)
+            mdiActivateTimer.Stop();
+            if (MdiChildren.Length > 0)
             {
-                instrucLbl.Visible = true;
+                instrucLbl.Hide();
             }
+            else
+            {
+                instrucLbl.Show();
+            }
+        }
+
+        private void mainForm_Resize(object sender, EventArgs e)
+        {
+            if (OldFormWindowState != WindowState)
+            {
+                OldFormWindowState = WindowState;
+                if (WindowState == FormWindowState.Maximized)
+                {
+                    sortMdiWindowsBasedOnSettings();
+                }
+            }
+        }
+        
+        private void mainForm_ResizeEnd(object sender, EventArgs e)
+        {
+            sortMdiWindowsBasedOnSettings();
         }
     }
 }

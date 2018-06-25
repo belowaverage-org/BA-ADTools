@@ -774,7 +774,10 @@
             this.Name = "userForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Please wait...";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.userForm_FormClosed);
             this.Load += new System.EventHandler(this.UserForm_Load);
+            this.Shown += new System.EventHandler(this.userForm_Shown);
+            this.Resize += new System.EventHandler(this.userForm_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();

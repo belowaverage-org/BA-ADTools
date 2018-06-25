@@ -10,23 +10,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.DirectoryServices.AccountManagement;
+using System.Runtime.InteropServices;
 
 namespace BAADTools
 {
     public partial class userForm : Form
     {
+        public string userDN;
+        public int isPwExpired;
 
         public Form parentForm;
-
-        public string userDN;
-
         public System.DirectoryServices.PropertyCollection userProp;
-
         public UserPrincipal userPrinc;
-
         public DirectoryEntry userEntry;
-
-        public int isPwExpired;
+        public FormWindowState OldFormWindowState;
 
         public userForm(Form pf, string dn)
         {
@@ -121,6 +118,25 @@ namespace BAADTools
                 e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
                 e.Graphics.ScaleTransform(xScale, yScale);
                 e.Graphics.DrawImage(pictureBox.Image, new PointF());
+            }
+        }
+
+        private void userForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            mainForm.sortMdiWindowsBasedOnSettings();
+        }
+
+        private void userForm_Shown(object sender, EventArgs e)
+        {
+            mainForm.sortMdiWindowsBasedOnSettings();
+        }
+
+        private void userForm_Resize(object sender, EventArgs e)
+        {
+            if (OldFormWindowState != WindowState)
+            {
+                OldFormWindowState = WindowState;
+                mainForm.sortMdiWindowsBasedOnSettings();
             }
         }
     }

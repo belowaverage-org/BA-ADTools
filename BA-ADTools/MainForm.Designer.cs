@@ -118,7 +118,7 @@
             this.mainList.ItemHeight = 15;
             this.mainList.Location = new System.Drawing.Point(0, 45);
             this.mainList.Name = "mainList";
-            this.mainList.Size = new System.Drawing.Size(178, 416);
+            this.mainList.Size = new System.Drawing.Size(178, 555);
             this.mainList.TabIndex = 3;
             this.mainList.DoubleClick += new System.EventHandler(this.listBox1_DbCLick);
             this.mainList.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.listBox1_KeyPress);
@@ -141,9 +141,9 @@
             this.lbCount,
             this.statusSpace,
             this.progressBar});
-            this.statusBar.Location = new System.Drawing.Point(0, 461);
+            this.statusBar.Location = new System.Drawing.Point(0, 600);
             this.statusBar.Name = "statusBar";
-            this.statusBar.Size = new System.Drawing.Size(1100, 22);
+            this.statusBar.Size = new System.Drawing.Size(1107, 22);
             this.statusBar.SizingGrip = false;
             this.statusBar.TabIndex = 6;
             // 
@@ -162,7 +162,7 @@
             // statusSpace
             // 
             this.statusSpace.Name = "statusSpace";
-            this.statusSpace.Size = new System.Drawing.Size(940, 17);
+            this.statusSpace.Size = new System.Drawing.Size(947, 17);
             this.statusSpace.Spring = true;
             // 
             // progressBar
@@ -186,7 +186,7 @@
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(3, 2, 0, 2);
             this.menuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip.Size = new System.Drawing.Size(1100, 23);
+            this.menuStrip.Size = new System.Drawing.Size(1107, 23);
             this.menuStrip.TabIndex = 7;
             // 
             // windowListMenu
@@ -661,7 +661,7 @@
             this.splitter.BackColor = System.Drawing.Color.WhiteSmoke;
             this.splitter.Location = new System.Drawing.Point(0, 23);
             this.splitter.Name = "splitter";
-            this.splitter.Size = new System.Drawing.Size(181, 438);
+            this.splitter.Size = new System.Drawing.Size(181, 577);
             this.splitter.TabIndex = 9;
             this.splitter.TabStop = false;
             this.splitter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitter_MouseDown);
@@ -672,12 +672,14 @@
             // 
             this.instrucLbl.AutoEllipsis = true;
             this.instrucLbl.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.instrucLbl.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.instrucLbl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.instrucLbl.Font = new System.Drawing.Font("Segoe UI Semilight", 16F);
             this.instrucLbl.Location = new System.Drawing.Point(181, 23);
             this.instrucLbl.Margin = new System.Windows.Forms.Padding(0);
             this.instrucLbl.Name = "instrucLbl";
-            this.instrucLbl.Size = new System.Drawing.Size(919, 438);
+            this.instrucLbl.Padding = new System.Windows.Forms.Padding(3);
+            this.instrucLbl.Size = new System.Drawing.Size(926, 577);
             this.instrucLbl.TabIndex = 11;
             this.instrucLbl.Text = "Double-Click a user to begin...";
             this.instrucLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -686,7 +688,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1100, 483);
+            this.ClientSize = new System.Drawing.Size(1107, 622);
             this.Controls.Add(this.instrucLbl);
             this.Controls.Add(this.mainList);
             this.Controls.Add(this.filterBox);
@@ -701,6 +703,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BA-ADTools";
             this.MdiChildActivate += new System.EventHandler(this.mainForm_MdiChildActivate);
+            this.ResizeEnd += new System.EventHandler(this.mainForm_ResizeEnd);
+            this.Resize += new System.EventHandler(this.mainForm_Resize);
             this.statusBar.ResumeLayout(false);
             this.statusBar.PerformLayout();
             this.menuStrip.ResumeLayout(false);
