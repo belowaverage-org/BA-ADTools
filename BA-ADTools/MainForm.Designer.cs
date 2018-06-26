@@ -143,7 +143,7 @@
             this.progressBar});
             this.statusBar.Location = new System.Drawing.Point(0, 600);
             this.statusBar.Name = "statusBar";
-            this.statusBar.Size = new System.Drawing.Size(1107, 22);
+            this.statusBar.Size = new System.Drawing.Size(1120, 22);
             this.statusBar.SizingGrip = false;
             this.statusBar.TabIndex = 6;
             // 
@@ -162,7 +162,7 @@
             // statusSpace
             // 
             this.statusSpace.Name = "statusSpace";
-            this.statusSpace.Size = new System.Drawing.Size(947, 17);
+            this.statusSpace.Size = new System.Drawing.Size(960, 17);
             this.statusSpace.Spring = true;
             // 
             // progressBar
@@ -186,7 +186,7 @@
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(3, 2, 0, 2);
             this.menuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip.Size = new System.Drawing.Size(1107, 23);
+            this.menuStrip.Size = new System.Drawing.Size(1120, 23);
             this.menuStrip.TabIndex = 7;
             // 
             // windowListMenu
@@ -679,7 +679,7 @@
             this.instrucLbl.Margin = new System.Windows.Forms.Padding(0);
             this.instrucLbl.Name = "instrucLbl";
             this.instrucLbl.Padding = new System.Windows.Forms.Padding(3);
-            this.instrucLbl.Size = new System.Drawing.Size(926, 577);
+            this.instrucLbl.Size = new System.Drawing.Size(939, 577);
             this.instrucLbl.TabIndex = 11;
             this.instrucLbl.Text = "Double-Click a user to begin...";
             this.instrucLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -688,7 +688,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1107, 622);
+            this.ClientSize = new System.Drawing.Size(1120, 622);
             this.Controls.Add(this.instrucLbl);
             this.Controls.Add(this.mainList);
             this.Controls.Add(this.filterBox);
