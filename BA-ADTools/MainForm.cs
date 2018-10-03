@@ -84,7 +84,7 @@ namespace BAADTools
         private void MdiLayoutTimer_Tick(object sender, EventArgs e)
         {
             mdiLayoutTimer.Stop();
-            LayoutMdi(MdiLayout.TileVertical);
+            //LayoutMdi(MdiLayout.TileVertical);
         }
 
         private void searchWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -150,7 +150,9 @@ namespace BAADTools
 
         private void aboutBAADToolsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new aboutBox().Show();
+            Form aboutBox = new aboutBox();
+            aboutBox.MdiParent = this;
+            aboutBox.Show();
         }
 
         private void aboutBelowAverageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -160,7 +162,9 @@ namespace BAADTools
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            new statusForm().Show();
+            Form statusForm = new statusForm();
+            statusForm.MdiParent = this;
+            statusForm.Show();
         }
 
         private void listBox1_DbCLick(object sender, EventArgs e)

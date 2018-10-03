@@ -48,7 +48,7 @@ namespace BAADTools
 
         private void backgroundProc_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            
+
             Text = nameLb.Text = userPrinc.DisplayName;
             usernameLb.Text = userPrinc.SamAccountName;
             givenNameBox.Text = userPrinc.GivenName;
@@ -58,16 +58,24 @@ namespace BAADTools
             emailBox.Text = userPrinc.EmailAddress;
 
             if (userProp["streetAddress"].Count != 0)
+            {
                 addressBox.Text = userProp["streetAddress"].Value.ToString();
+            }
 
             if (userProp["st"].Count != 0)
+            { 
                 stateBox.Text = userProp["st"].Value.ToString();
+            }
 
             if (userProp["co"].Count != 0)
+            {
                 countryBox.Text = userProp["co"].Value.ToString();
+            }
 
             if (userProp["logonCount"].Count != 0)
+            {
                 logonCountBox.Text = userProp["logonCount"].Value.ToString();
+            }
 
             if (userProp["thumbnailPhoto"].Count != 0)
             {
